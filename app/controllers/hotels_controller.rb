@@ -19,6 +19,7 @@ class HotelsController < ApplicationController
 
   # GET /hotels/1/edit
   def edit
+    @hotel.room_categories.build
   end
 
   # POST /hotels
