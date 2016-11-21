@@ -23,6 +23,8 @@
       <div class="field">
         <%= room_category.label :name %>
         <%= room_category.text_field :name %>
+        <%= room_category.check_box :_destroy %>
+        <%= room_category.label :_destroy, 'remove' %>
       </div>
     </div>
   <% end %>
