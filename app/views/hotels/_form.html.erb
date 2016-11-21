@@ -23,7 +23,12 @@
       <div class="field">
         <%= room_category.label :name %>
         <%= room_category.text_field :name %>
-        <%= room_category.remove_nested_fields_link 'Remove Me'%>
+
+        <%= room_category.object_name.gsub(/[^\d]/, '').size %>
+
+        <% if room_category.object_name.gsub(/[^\d]/, '').size == 0 %>
+          <%= room_category.remove_nested_fields_link 'Remove Me'%>
+        <% end %>
       </div>
     </div>
   <% end %>
