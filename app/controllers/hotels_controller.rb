@@ -15,6 +15,7 @@ class HotelsController < ApplicationController
   # GET /hotels/new
   def new
     @hotel = Hotel.new
+    @hotel.room_categories.build
   end
 
   # GET /hotels/1/edit
