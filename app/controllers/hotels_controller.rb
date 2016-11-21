@@ -15,12 +15,12 @@ class HotelsController < ApplicationController
   # GET /hotels/new
   def new
     @hotel = Hotel.new
-    @hotel.room_categories.build
   end
 
   # GET /hotels/1/edit
   def edit
-    @hotel.room_categories.build
+    @room_old_size = @hotel.room_categories.size
+    @init_count = 0
   end
 
   # POST /hotels

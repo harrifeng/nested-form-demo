@@ -18,16 +18,23 @@
 
   <h2> Room Categories </h2>
 
-  <%= f.fields_for :room_categories do |room_category| %>
+  <%= f.nested_fields_for :room_categories do |room_category| %>
     <div class="room_category_field">
       <div class="field">
         <%= room_category.label :name %>
         <%= room_category.text_field :name %>
-        <%= room_category.check_box :_destroy %>
-        <%= room_category.label :_destroy, 'remove' %>
+        <%= room_category.remove_nested_fields_link 'Remove Me'%>
       </div>
     </div>
   <% end %>
+
+  <div class="actions">
+    <%= f.add_nested_fields_link :room_categories %>
+  </div>
+  <div class="actions">
+    <%= f.remove_nested_fields_link :room_categories %>
+  </div>
+
 
   <div class="actions">
     <%= f.submit %>
