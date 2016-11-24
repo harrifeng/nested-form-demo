@@ -13,5 +13,10 @@ var app = new Vue({
                 that.hotels = res;
             }
         });
+    },
+    methods: {
+        tester: function(event) {
+            alert('hello');
+        }
     }
 });
