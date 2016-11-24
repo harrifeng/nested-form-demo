@@ -2,9 +2,7 @@ var Hotels = React.createClass({
   render: function() {
     hotels = this.props.hotels.map( function(hotel) {
       return (
-        <tr key={hotel.id}>
-          <td>{hotel.name}</td>
-        </tr>
+        <Hotel hotel= {hotel} key ={hotel.id} />
       );
     });
     return (
