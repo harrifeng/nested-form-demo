@@ -62,7 +62,7 @@ var Hotels = React.createClass({
                 <td>
                 </td>
                 <td>
-                  <input type="text" onChange={this._handleNameChange}/>
+                  <input type="text" onChange={this._handleNameChange} value={this.state.hotel.name}/>
                 </td>
                 <td>
                   <button onClick={this._handleAddHotel}> Add This Hotel</button>
