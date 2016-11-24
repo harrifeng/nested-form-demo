@@ -3,7 +3,6 @@
 <h1>Hotels</h1>
 <div id="app">
   {{ message }}
-</div>
 
 <table>
   <thead>
@@ -14,6 +13,9 @@
   </thead>
 
   <tbody>
+    <tr v-for="hotel in hotels">
+      <td>{{hotel.name}}</td>
+    </tr>
     <% @hotels.each do |hotel| %>
       <tr>
         <td><%= hotel.name %></td>
@@ -24,6 +26,7 @@
     <% end %>
   </tbody>
 </table>
+</div>
 
 <br>
 
