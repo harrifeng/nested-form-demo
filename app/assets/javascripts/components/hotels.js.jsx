@@ -1,13 +1,43 @@
 var Hotels = React.createClass({
   getInitialState: function() {
     return {
-      hotels: this.props.employees,
+      hotels: this.props.hotels,
       hotel: {
         name: ''
       },
       errors: {}
     };
   },
+
+  _handleAddHotel: function()  {
+    var that = this;
+
+    $.ajax({
+      method: 'POST',
+      data: {
+        hotel: that.state.hotel,
+      },
+      url: '/hotels.json',
+      success: function(res) {
+        var newHotelList = that.state.hotels;
+        newHotelList.push(res);
+        that.setState({
+          hotels: newHotelList,
+          hotel: {
+            name: ''
+          },
+          errors: {}
+        });
+      }
+    });
+  },
+
+  _handleNameChange(e) {
+    var newHotel = this.state.hotel;
+    newHotel.name = e.target.value;
+    this.setState({hotel: newHotel});
+  },
+
 
   render: function() {
     hotels = this.props.hotels.map( function(hotel) {
@@ -32,10 +62,10 @@ var Hotels = React.createClass({
                 <td>
                 </td>
                 <td>
-                  <input type="text"/>
+                  <input type="text" onChange={this._handleNameChange}/>
                 </td>
                 <td>
-                  <button onClick={this.handleAddHotel}> Add This Hotel</button>
+                  <button onClick={this._handleAddHotel}> Add This Hotel</button>
                 </td>
               </tr>
             </tbody>
