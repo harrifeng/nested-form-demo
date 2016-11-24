@@ -5,6 +5,7 @@ class HotelsController < ApplicationController
   # GET /hotels.json
   def index
     @hotels = Hotel.all
+    render component: 'Hotels', props: { hotels: @hotels}
   end
 
   # GET /hotels/1
