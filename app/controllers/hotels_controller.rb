@@ -32,10 +32,10 @@ class HotelsController < ApplicationController
     respond_to do |format|
       if @hotel.save
         format.html { redirect_to @hotel, notice: 'Hotel was successfully created.' }
-        format.json { render :show, status: :created, location: @hotel }
+        format.json { render :json => @hotel }
       else
         format.html { render :new }
-        format.json { render json: @hotel.errors, status: :unprocessable_entity }
+        format.json { render json: {:erros => @hotel.errors.messages}, :status => 442 }
       end
     end
   end

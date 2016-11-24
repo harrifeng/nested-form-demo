@@ -1,11 +1,11 @@
 var Hotel = React.createClass({
-  getInitialState() {
+  getInitialState: function() {
     return {
       hotel: this.props.hotel
     }
   },
 
-  render() {
+  render: function() {
     return (
       <tr>
         <td>{ this.state.hotel.id } </td>
