@@ -5,6 +5,7 @@ var Hotels = React.createClass({
       hotel: {
         name: ''
       },
+      tmp: 'hello',
       editMode: false,
       errors: {}
     };
@@ -42,9 +43,7 @@ var Hotels = React.createClass({
 
 
   _handleNameChange(e) {
-    var newHotel = this.state.hotel;
-    newHotel.name = e.target.value;
-    this.setState({hotel: newHotel});
+    this.setState({tmp: e.target.value + e.target.value});
   },
 
   _handleToggleEditMode() {
@@ -53,46 +52,68 @@ var Hotels = React.createClass({
 
   render: function() {
     if (this.state.editMode) {
-      hotels = this.props.hotels.map( function(hotel, idx) {
+      hotels = this.props.hotels.map( (hotel, idx) =>{
         return (
           <tr key={idx}>
             <td>
               {hotel.id}
             </td>
             <td>
-              <input type="text" onChange={this._handleNameChange} defaultValue={hotel.name}/>
+              <input type="text" onChange={this._handleNameChange} key={idx} defaultValue={hotel.name}/>
             </td>
           </tr>
         );
       });
+
+      return (
+        <div>
+          <h1>Edit Mode</h1>
+          <button onClick={this._handleNameChange}> Tmp</button>
+          <button onClick={this._handleAddOneInput}> Add Input</button>
+          <button onClick={this._handleToggleEditMode}> Toggle Edit Mode</button>
+          <div id="hotels">
+            <table>
+              <thead>
+                <tr>
+                  <th>Id</th>
+                  <th>Name</th>
+                </tr>
+              </thead>
+              <tbody>
+                {hotels}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      );
+
     } else {
       hotels = this.props.hotels.map( function(hotel, idx) {
         return (
           <Hotel hotel= {hotel} key ={idx} />
         );
       });
-    }
-
-    title = this.state.editMode ? "Hotel EditMode" : "Hotel NormalMode"
-    return (
-      <div>
-        <h1>{title}</h1>
-        <button onClick={this._handleAddOneInput}> Add Input</button>
-        <button onClick={this._handleToggleEditMode}> Toggle Edit Mode</button>
-        <div id="hotels">
-          <table>
-            <thead>
-              <tr>
-                <th>Id</th>
-                <th>Name</th>
-              </tr>
-            </thead>
-            <tbody>
-              {hotels}
-            </tbody>
-          </table>
+      return (
+        <div>
+          <h1>Normal Mode</h1>
+          <button onClick={this._handleNameChange}> Tmp</button>
+          <button onClick={this._handleAddOneInput}> Add Input</button>
+          <button onClick={this._handleToggleEditMode}> Toggle Edit Mode</button>
+          <div id="hotels">
+            <table>
+              <thead>
+                <tr>
+                  <th>Id</th>
+                  <th>Name</th>
+                </tr>
+              </thead>
+              <tbody>
+                {hotels}
+              </tbody>
+            </table>
+          </div>
         </div>
-      </div>
-    );
+      );
+    }
   }
 });
