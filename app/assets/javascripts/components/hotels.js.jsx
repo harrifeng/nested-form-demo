@@ -32,6 +32,13 @@ var Hotels = React.createClass({
     });
   },
 
+  _handleAddOneInput(){
+    var newHotels = this.state.hotels;
+    newHotels.push({name: 'hello'});
+    this.setState({hotels: newHotels});
+  },
+
+
   _handleNameChange(e) {
     var newHotel = this.state.hotel;
     newHotel.name = e.target.value;
@@ -40,14 +47,15 @@ var Hotels = React.createClass({
 
 
   render: function() {
-    hotels = this.props.hotels.map( function(hotel) {
+    hotels = this.props.hotels.map( function(hotel, idx) {
       return (
-        <Hotel hotel= {hotel} key ={hotel.id} />
+        <Hotel hotel= {hotel} key ={idx} />
       );
     });
     return (
       <div>
         <h1>Hotels</h1>
+        <button onClick={this._handleAddOneInput}> Add Input</button>
         <div id="hotels">
           <table>
             <thead>
