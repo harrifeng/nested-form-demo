@@ -75,10 +75,16 @@ var Hotels = React.createClass({
     });
   },
 
+  _handleRemoveOneInput(idx, event) {
+    var newHotels = this.state.hotels;
+    newHotels.splice(idx, 1);
+    this.setState({hotels: newHotels});
+  },
 
   render: function() {
     if (this.state.editMode) {
       hotels = this.state.hotels.map( (hotel, idx) =>{
+        delete_sign = hotel.added ?  (<button onClick={(event) => this._handleRemoveOneInput(idx, event)}> remove</button>) : (<div></div>)
         return (
           <tr key={idx}>
             <td>
@@ -86,6 +92,7 @@ var Hotels = React.createClass({
             </td>
             <td>
               <input type="text" onChange={(event) => this._handleNameChange(idx, event)} key={idx} defaultValue={hotel.name}/>
+              {delete_sign}
             </td>
           </tr>
         );
