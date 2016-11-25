@@ -42,8 +42,8 @@ var Hotels = React.createClass({
   },
 
 
-  _handleNameChange(e) {
-    this.setState({tmp: e.target.value + e.target.value});
+  _handleNameChange(idx, event) {
+    this.setState({tmp: event.target.value + idx});
   },
 
   _handleToggleEditMode() {
@@ -59,7 +59,7 @@ var Hotels = React.createClass({
               {hotel.id}
             </td>
             <td>
-              <input type="text" onChange={this._handleNameChange} key={idx} defaultValue={hotel.name}/>
+              <input type="text" onChange={(event) => this._handleNameChange(idx, event)} key={idx} defaultValue={hotel.name}/>
             </td>
           </tr>
         );
