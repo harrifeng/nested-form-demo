@@ -52,6 +52,23 @@ var Hotels = React.createClass({
     this.setState({editMode: !this.state.editMode});
   },
 
+  _handleSubmitAll() {
+    var that = this;
+
+    $.ajax({
+      method: 'POST',
+      data: {
+        hotels: that.state.hotels,
+      },
+      url: '/hotels/update_multiple.json',
+      success: function(res) {
+        console.log("success");
+      }
+    });
+    this.setState({editMode: !this.state.editMode});
+  },
+
+
   render: function() {
     if (this.state.editMode) {
       hotels = this.props.hotels.map( (hotel, idx) =>{
@@ -85,6 +102,7 @@ var Hotels = React.createClass({
               </tbody>
             </table>
           </div>
+          <button onClick={this._handleSubmitAll}>Submit All</button>
         </div>
       );
 

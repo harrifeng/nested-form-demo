@@ -64,6 +64,16 @@ class HotelsController < ApplicationController
     end
   end
 
+  def update_multiple
+    params['hotels'].keys.each do |id|
+      @hotel = Hotel.find(params['hotels'][id]["id"])
+      permit_params = params['hotels'][id].permit(:name)
+      @hotel.update_attributes(permit_params)
+    end
+    @hotels = Hotel.all
+    render component: 'Hotels', props: { hotels: @hotels}
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_hotel
