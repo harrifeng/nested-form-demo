@@ -36,7 +36,7 @@ var Hotels = React.createClass({
 
   _handleAddOneInput(){
     var newHotels = this.state.hotels;
-    newHotels.push({name: 'hello'});
+    newHotels.push({name: ''});
     this.setState({hotels: newHotels});
   },
 
@@ -52,11 +52,27 @@ var Hotels = React.createClass({
   },
 
   render: function() {
-    hotels = this.props.hotels.map( function(hotel, idx) {
-      return (
-        <Hotel hotel= {hotel} key ={idx} />
-      );
-    });
+    if (this.state.editMode) {
+      hotels = this.props.hotels.map( function(hotel, idx) {
+        return (
+          <tr key={idx}>
+            <td>
+              {hotel.id}
+            </td>
+            <td>
+              <input type="text" onChange={this._handleNameChange} defaultValue={hotel.name}/>
+            </td>
+          </tr>
+        );
+      });
+    } else {
+      hotels = this.props.hotels.map( function(hotel, idx) {
+        return (
+          <Hotel hotel= {hotel} key ={idx} />
+        );
+      });
+    }
+
     title = this.state.editMode ? "Hotel EditMode" : "Hotel NormalMode"
     return (
       <div>
@@ -73,16 +89,6 @@ var Hotels = React.createClass({
             </thead>
             <tbody>
               {hotels}
-              <tr>
-                <td>
-                </td>
-                <td>
-                  <input type="text" onChange={this._handleNameChange} value={this.state.hotel.name}/>
-                </td>
-                <td>
-                  <button onClick={this._handleAddHotel}> Add This Hotel</button>
-                </td>
-              </tr>
             </tbody>
           </table>
         </div>
