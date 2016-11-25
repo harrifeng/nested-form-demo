@@ -76,9 +76,9 @@ var Hotels = React.createClass({
   },
 
   _handleRemoveOneInput(idx, event) {
-    var newHotels = this.state.hotels;
-    newHotels.splice(idx, 1);
-    this.setState({hotels: newHotels});
+    var arr = this.state.hotels;
+    arr.splice(idx, 1);
+    this.setState({hotels: arr});
   },
 
   render: function() {
@@ -91,7 +91,7 @@ var Hotels = React.createClass({
               {hotel.id}
             </td>
             <td>
-              <input type="text" onChange={(event) => this._handleNameChange(idx, event)} key={idx} defaultValue={hotel.name}/>
+              <input type="text" onChange={(event) => this._handleNameChange(idx, event)} key={idx} value={hotel.name}/>
               {delete_sign}
             </td>
           </tr>
