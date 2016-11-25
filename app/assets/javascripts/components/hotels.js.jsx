@@ -37,7 +37,10 @@ var Hotels = React.createClass({
 
   _handleAddOneInput(){
     var newHotels = this.state.hotels;
-    newHotels.push({name: ''});
+    newHotels.push({
+      name: '',
+      added: true,
+    });
     this.setState({hotels: newHotels});
   },
 
@@ -63,15 +66,19 @@ var Hotels = React.createClass({
       url: '/hotels/update_multiple.json',
       success: function(res) {
         console.log("success");
+        console.log(res.props);
+        that.setState({
+          hotels: res.props,
+          editMode: false
+        });
       }
     });
-    this.setState({editMode: !this.state.editMode});
   },
 
 
   render: function() {
     if (this.state.editMode) {
-      hotels = this.props.hotels.map( (hotel, idx) =>{
+      hotels = this.state.hotels.map( (hotel, idx) =>{
         return (
           <tr key={idx}>
             <td>
@@ -107,7 +114,7 @@ var Hotels = React.createClass({
       );
 
     } else {
-      hotels = this.props.hotels.map( function(hotel, idx) {
+      hotels = this.state.hotels.map( function(hotel, idx) {
         return (
           <Hotel hotel= {hotel} key ={idx} />
         );

@@ -66,22 +66,27 @@ class HotelsController < ApplicationController
 
   def update_multiple
     params['hotels'].keys.each do |id|
-      @hotel = Hotel.find(params['hotels'][id]["id"])
-      permit_params = params['hotels'][id].permit(:name)
-      @hotel.update_attributes(permit_params)
+      unless params['hotels'][id]["added"]
+        @hotel = Hotel.find(params['hotels'][id]["id"])
+        permit_params = params['hotels'][id].permit(:name)
+        @hotel.update_attributes(permit_params)
+      end
     end
     @hotels = Hotel.all
-    render component: 'Hotels', props: { hotels: @hotels}
+    # render component: 'Hotels', props: { hotels: @hotels}, status: 200
+    respond_to do |format|
+      format.json { render json: {:props => @hotels}, :status => 200 }
+    end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_hotel
-      @hotel = Hotel.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_hotel
+    @hotel = Hotel.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def hotel_params
-      params.require(:hotel).permit(:name, room_categories_attributes: [:id, :name, :_destroy])
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def hotel_params
+    params.require(:hotel).permit(:name, room_categories_attributes: [:id, :name, :_destroy])
+  end
 end
