@@ -66,7 +66,11 @@ class HotelsController < ApplicationController
 
   def update_multiple
     params['hotels'].keys.each do |id|
-      unless params['hotels'][id]["added"]
+      if params['hotels'][id]["added"]
+        permit_params = params['hotels'][id].permit(:name)
+        @new_hotel = Hotel.new(permit_params)
+        @new_hotel.save
+      else
         @hotel = Hotel.find(params['hotels'][id]["id"])
         permit_params = params['hotels'][id].permit(:name)
         @hotel.update_attributes(permit_params)
