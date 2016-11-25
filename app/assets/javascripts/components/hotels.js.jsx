@@ -5,6 +5,7 @@ var Hotels = React.createClass({
       hotel: {
         name: ''
       },
+      editMode: false,
       errors: {}
     };
   },
@@ -26,6 +27,7 @@ var Hotels = React.createClass({
           hotel: {
             name: ''
           },
+          editMode: this.state.editMode,
           errors: {}
         });
       }
@@ -45,6 +47,9 @@ var Hotels = React.createClass({
     this.setState({hotel: newHotel});
   },
 
+  _handleToggleEditMode() {
+    this.setState({editMode: !this.state.editMode});
+  },
 
   render: function() {
     hotels = this.props.hotels.map( function(hotel, idx) {
@@ -52,10 +57,12 @@ var Hotels = React.createClass({
         <Hotel hotel= {hotel} key ={idx} />
       );
     });
+    title = this.state.editMode ? "Hotel EditMode" : "Hotel NormalMode"
     return (
       <div>
-        <h1>Hotels</h1>
+        <h1>{title}</h1>
         <button onClick={this._handleAddOneInput}> Add Input</button>
+        <button onClick={this._handleToggleEditMode}> Toggle Edit Mode</button>
         <div id="hotels">
           <table>
             <thead>
