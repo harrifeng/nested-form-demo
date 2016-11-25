@@ -43,7 +43,9 @@ var Hotels = React.createClass({
 
 
   _handleNameChange(idx, event) {
-    this.setState({tmp: event.target.value + idx});
+    var newHotels = this.state.hotels;
+    newHotels[idx].name = event.target.value
+    this.setState({hotels: newHotels});
   },
 
   _handleToggleEditMode() {
@@ -68,7 +70,6 @@ var Hotels = React.createClass({
       return (
         <div>
           <h1>Edit Mode</h1>
-          <button onClick={this._handleNameChange}> Tmp</button>
           <button onClick={this._handleAddOneInput}> Add Input</button>
           <button onClick={this._handleToggleEditMode}> Toggle Edit Mode</button>
           <div id="hotels">
@@ -96,8 +97,6 @@ var Hotels = React.createClass({
       return (
         <div>
           <h1>Normal Mode</h1>
-          <button onClick={this._handleNameChange}> Tmp</button>
-          <button onClick={this._handleAddOneInput}> Add Input</button>
           <button onClick={this._handleToggleEditMode}> Toggle Edit Mode</button>
           <div id="hotels">
             <table>
