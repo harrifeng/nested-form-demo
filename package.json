@@ -1,8 +1,9 @@
 {
   "name": "ATOP",
-  "dependencies" : {
+  "dependencies": {
     "browserify": "~10.2.4",
-    "browserify-incremental": "^3.0.1"
+    "browserify-incremental": "^3.0.1",
+    "react": "^15.4.1"
   },
   "license": "MIT",
   "engines": {
